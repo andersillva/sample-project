@@ -101,7 +101,6 @@ jobs:
     name: Deploy to QA (AWS)
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'workflow_dispatch'
     environment:
       name: qa
       url: https://qa.example.com
@@ -147,7 +146,7 @@ jobs:
     name: Deploy to Prod (AWS)
     runs-on: ubuntu-latest
     needs: smoke-test
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     environment:
       name: production
       url: https://prod.example.com

@@ -132,6 +132,7 @@ jobs:
           wait-for-service-stability: true
 
   smoke-test:
+    name: Smoke Test
     runs-on: ubuntu-latest
     needs: deploy-qa
 

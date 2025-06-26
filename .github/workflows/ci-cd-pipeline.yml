@@ -43,7 +43,7 @@ jobs:
     needs: integration-tests
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Set up JDK 17
@@ -177,7 +177,7 @@ jobs:
           wait-for-service-stability: true
 
   smoke-test-pre-prod:
-    name: Smoke Test Pre Production
+    name: Smoke Test Pre Prod
     runs-on: ubuntu-latest
     needs: deploy-pre-prod
 

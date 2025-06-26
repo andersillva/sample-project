@@ -98,7 +98,7 @@ jobs:
         run: docker push $IMAGE_NAME:$IMAGE_TAG
 
   deploy-qa:
-    name: Deploy to QA (AWS)
+    name: Deploy to QA (Amazon ECS)
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -143,7 +143,7 @@ jobs:
           sh 'src/main/scripts/smoke-test.sh'
 
   deploy-pre-prod:
-    name: Deploy to Pre Production (AWS)
+    name: Deploy to Pre Prod (Amazon ECS)
     runs-on: ubuntu-latest
     needs: smoke-test-qa
     if: github.ref == 'refs/heads/main'
@@ -189,7 +189,7 @@ jobs:
           sh 'src/main/scripts/smoke-test.sh'
 
   deploy-prod:
-    name: Deploy to Production (AWS)
+    name: Deploy to Prod (Amazon ECS)
     runs-on: ubuntu-latest
     needs: smoke-test-pre-prod
     if: github.ref == 'refs/heads/main'

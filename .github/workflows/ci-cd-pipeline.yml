@@ -184,7 +184,7 @@ jobs:
       - name: Smoke Test
         shell: bash
         run: |
-          sh 'src/main/scripts/smoke-test.sh'
+          bash src/main/scripts/smoke-test.sh "http://sample-project-pre-prod-alb-1242067876.us-east-2.elb.amazonaws.com/api/v1/sample/hello"
 
   deploy-prod:
     name: Deploy to Prod (Amazon ECS)

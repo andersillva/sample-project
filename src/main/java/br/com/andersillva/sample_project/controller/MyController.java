@@ -13,7 +13,12 @@ public class MyController {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
+        return new ResponseEntity<>("Hello, world!", HttpStatus.OK);
+    }
+
+    @GetMapping("/health-check")
+    public ResponseEntity<Void> healthCheck() {
+        return ResponseEntity.ok().build();
     }
 
 }

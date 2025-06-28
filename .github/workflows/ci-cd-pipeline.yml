@@ -103,7 +103,6 @@ jobs:
     needs: build
     environment:
       name: qa
-      url: https://qa.example.com
     steps:
       - uses: actions/checkout@v4
 
@@ -140,7 +139,7 @@ jobs:
       - name: Deploy
         shell: bash
         run: |
-          sh 'src/main/scripts/smoke-test.sh'
+          sh 'src/main/scripts/smoke-test-qa.sh'
 
   deploy-pre-prod:
     name: Deploy to Pre Prod (Amazon ECS)
@@ -148,8 +147,7 @@ jobs:
     needs: smoke-test-qa
     if: github.ref == 'refs/heads/main'
     environment:
-      name: production
-      url: https://prod.example.com
+      name: pre-production
     steps:
       - uses: actions/checkout@v4
 
@@ -160,20 +158,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Render ECS task definition for Production
-        id: render-task-def-prod
+      - name: Render ECS task definition for Pre Production
+        id: render-task-def-pre-prod
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ecs-task-def-prod.json
+          task-definition: ecs-task-def-pre-prod.json
           container-name: sample-project
           image: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-      - name: Deploy to ECS Production
+      - name: Deploy to ECS Pre Production
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.render-task-def-prod.outputs.task-definition }}
-          service: sample-project-prod-service
-          cluster: sample-project-prod-cluster
+          task-definition: ${{ steps.render-task-def-pre-prod.outputs.task-definition }}
+          service: sample-project-task-service-pre-prod
+          cluster: andersillva-sample-project-pre-prod-cluster
           wait-for-service-stability: true
 
   smoke-test-pre-prod:
@@ -195,7 +193,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: https://prod.example.com
     steps:
       - uses: actions/checkout@v4
 
@@ -218,6 +215,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-task-def-prod.outputs.task-definition }}
-          service: sample-project-prod-service
-          cluster: sample-project-prod-cluster
+          service: sample-project-task-service-prod
+          cluster: andersillva-sample-project-prod-cluster
           wait-for-service-stability: true

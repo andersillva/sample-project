@@ -1,0 +1,23 @@
+{
+    "family": "sample-project-task",
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::471534019967:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "sample-project",
+            "image": "andersillva/sample-project:latest",
+            "cpu": 256,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ]
+}

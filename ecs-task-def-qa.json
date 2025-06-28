@@ -4,7 +4,7 @@
     "networkMode": "awsvpc",
     "cpu": "256",
     "memory": "512",
-    "executionRoleArn": "arn:aws:iam::<sua-conta>:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::471534019967:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "sample-project",

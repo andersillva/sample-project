@@ -1,5 +1,10 @@
 {
     "family": "sample-project-task",
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::<sua-conta>:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "sample-project",
@@ -9,7 +14,8 @@
             "essential": true,
             "portMappings": [
                 {
-                    "containerPort": 8080
+                    "containerPort": 8080,
+                    "protocol": "tcp"
                 }
             ]
         }

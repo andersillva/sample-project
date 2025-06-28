@@ -126,7 +126,7 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-task-def-qa.outputs.task-definition }}
-          service: sample-project-qa-service
+          service: sample-project-task-service-qa
           cluster: andersillva-sample-project-qa-cluster
           wait-for-service-stability: true
 

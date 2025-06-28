@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -19,7 +18,7 @@ class MyControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Deve retornar 'Hello, world!' com status 200 para GET /api/v1/sample/hello")
+    @DisplayName("Should return 'Hello, world!' with status 200 for GET /api/v1/sample/hello")
     void testHello() throws Exception {
         mockMvc.perform(get("/api/v1/sample/hello"))
                 .andExpect(status().isOk())
@@ -28,7 +27,7 @@ class MyControllerTest {
     }
 
     @Test
-    @DisplayName("Deve retornar status 200 e corpo vazio para GET /api/v1/sample/health-check")
+    @DisplayName("Should return status 200 and empty body for GET /api/v1/sample/health-check")
     void testHealthCheck() throws Exception {
         mockMvc.perform(get("/api/v1/sample/health-check"))
                 .andExpect(status().isOk())

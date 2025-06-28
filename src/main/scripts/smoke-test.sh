@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="http://sample-project-alb-2025945722.us-east-2.elb.amazonaws.com/api/v1/sample/health-check"
+URL="$1"
 
 STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
 

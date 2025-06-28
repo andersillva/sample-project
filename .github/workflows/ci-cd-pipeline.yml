@@ -136,10 +136,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy
+      - name: Smoke Test
         shell: bash
         run: |
-          sh 'src/main/scripts/smoke-test-qa.sh'
+          bash src/main/scripts/smoke-test.sh "http://sample-project-alb-2025945722.us-east-2.elb.amazonaws.com/api/v1/sample/health-check"
 
   deploy-pre-prod:
     name: Deploy to Pre Prod (Amazon ECS)
@@ -181,7 +181,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy
+      - name: Smoke Test
         shell: bash
         run: |
           sh 'src/main/scripts/smoke-test.sh'
